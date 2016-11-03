@@ -1,0 +1,95 @@
+#!/usr/bin/php
+<?php
+
+//---------------------------------------------------------------------------
+// Include autoloader
+
+require __DIR__ . '/vendor/autoload.php';
+
+//---------------------------------------------------------------------------
+// Load config
+
+$config = parse_ini_file(__DIR__ . '/config.ini');
+
+//---------------------------------------------------------------------------
+// Crawl, parse and merge feeds
+
+$items = [];
+$feeds = [];
+foreach ($config['feeds'] as $feedUrl) {
+    $feed = new SimplePie();
+    $feed->enable_cache(false);
+    $feed->set_curl_options([
+        CURLOPT_SSL_VERIFYHOST => false,
+        CURLOPT_SSL_VERIFYPEER => false
+    ]);
+    $feed->set_feed_url($feedUrl);
+    $feed->init();
+    if ($feed->error()) {
+        printf("Error with feed %s: %s\n", $feedUrl, $feed->error());
+    } else {
+        foreach ($feed->get_items() as $item) {
+            if (empty($config['filter']) || preg_match($config['filter'], $item->get_title() . strip_tags($item->get_content()))) {
+                $items[] = $item;
+            }
+        }
+        $feeds[] = $feed;
+    }
+}
+
+//---------------------------------------------------------------------------
+// Sort items by date
+
+usort($items, function($i1, $i2) {
+    return $i2->get_date('U') <=> $i1->get_date('U');
+});
+
+//---------------------------------------------------------------------------
+// Sort feeds by title
+
+usort($feeds, function($f1, $f2) {
+    return strcmp($f1->get_title(), $f2->get_title());
+});
+
+//---------------------------------------------------------------------------
+// Clean build directroy
+
+if (file_exists(__DIR__ . '/build')) {
+    foreach (glob(__DIR__ . '/build/*') as $file) {
+        if (is_dir($file)) {
+            rmdir($file);
+        } else {
+            unlink($file);
+        }
+    }
+} else {
+    mkdir(__DIR__ . '/build');
+}
+
+//---------------------------------------------------------------------------
+// Generate output
+
+$templates = new League\Plates\Engine(__DIR__ . '/templates');
+for ($page = 1; $page < (count($items) / $config['page_size']) + 1; $page++) {
+    $data = $config;
+    $data['page'] = $page;
+    $data['items'] = array_slice($items, ($page-1)*$config['page_size'], $page*$config['page_size']);
+    $data['previous'] = $page == 1 ? false : ($page == 2 ? 'index' : $page - 1);
+    $data['next'] = $page*$config['page_size'] >= count($items) ? false : $page + 1;
+    $data['feeds'] = $feeds;
+
+    $html = $templates->render('index', $data);
+    file_put_contents(__DIR__ . '/build/' . ($page == 1 ? 'index' : $page) . '.html', $html);
+
+    if ($page == 1) {
+        $html = $templates->render('feed', $data);
+        file_put_contents(__DIR__ . '/build/feed.xml', $html);
+    }
+}
+
+//---------------------------------------------------------------------------
+// Add static resources
+
+foreach (glob(__DIR__ . '/static/*') as $file) {
+    copy($file, __DIR__ . '/build/' . basename($file));
+}
