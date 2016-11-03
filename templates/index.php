@@ -28,7 +28,7 @@
                             by
                             <a href="<?= $item->get_feed()->get_link() ?>" target="_blank"><?= $item->get_feed()->get_title() ?></a>
                         </p>
-                        <?= tidy_repair_string($item->get_content(), ['show-body-only' => true]) ?>
+                        <?= tidy_repair_string($item->get_content(), ['show-body-only' => true], 'utf8') ?>
                     </div>
                     <?php endforeach; ?>
                     <nav>
