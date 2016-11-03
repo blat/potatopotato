@@ -9,7 +9,7 @@ require __DIR__ . '/vendor/autoload.php';
 //---------------------------------------------------------------------------
 // Load config
 
-$config = parse_ini_file(__DIR__ . '/config.ini');
+$config = parse_ini_file(__DIR__ . '/config.ini', true);
 
 //---------------------------------------------------------------------------
 // Crawl, parse and merge feeds

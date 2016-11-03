@@ -9,3 +9,7 @@ page_size = 15
 date_format = j F Y, g:i a
 
 ;filter = "/(topic|another topic)/i"
+
+;[piwik]
+;url = https://piwik.mydomain.tld/
+;id = 1

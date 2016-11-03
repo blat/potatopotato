@@ -65,5 +65,20 @@
             <p>Last update: <?= date($date_format) ?>.</p>
             <p><a href="#">Back to top</a></p>
         </footer>
+        <?php if (!empty($piwik)): ?>
+        <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function(){
+            var u="<?= $piwik['url'] ?>";
+            _paq.push(["setTrackerUrl", u+"piwik.php"]);
+            _paq.push(["setSiteId", <?= $piwik['id'] ?>]);
+            var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+            g.defer=true; g.async=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+        })();
+        </script>
+        <noscript><img src="<?= $piwik['url'] ?>piwik.php?idsite=<?= $piwik['id'] ?>" style="border:0;" alt="" /></noscript>
+        <?php endif; ?>
     </body>
 </html>
