@@ -29,7 +29,7 @@ foreach ($config['feeds'] as $feedUrl) {
         printf("Error with feed %s: %s\n", $feedUrl, $feed->error());
     } else {
         foreach ($feed->get_items() as $item) {
-            if (empty($config['filter']) || preg_match($config['filter'], $item->get_title() . strip_tags($item->get_content()))) {
+            if (empty($config['filter']) || preg_match($config['filter'], $item->get_title() . $item->get_content())) {
                 $items[] = $item;
             }
         }
