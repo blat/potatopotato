@@ -4,6 +4,7 @@ feeds[] = http://anotherhost.tld/path/to/feed
 title = My Planet
 description = Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 about = Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+;favicon = https://you.tld/favicon.ico
 
 page_size = 15
 date_format = j F Y, g:i a
