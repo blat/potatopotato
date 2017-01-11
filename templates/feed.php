@@ -7,7 +7,7 @@
         <?php foreach ($items as $item): ?>
         <item>
             <title><![CDATA[<?= $item->get_title() ?>]]></title>
-            <author><?= $item->get_feed()->get_title() ?></author>
+            <author><?= $item->get_feed()->custom_title ?: $item->get_feed()->get_title() ?></author>
             <link><?= $item->get_link() ?></link>
             <guid isPermaLink="true"><?= $item->get_link() ?></guid>
             <description><![CDATA[<?= $item->get_content() ?>]]></description>

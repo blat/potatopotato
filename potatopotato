@@ -16,7 +16,7 @@ $config = parse_ini_file(__DIR__ . '/config.ini', true);
 
 $items = [];
 $feeds = [];
-foreach ($config['feeds'] as $feedUrl) {
+foreach ($config['feeds'] as $feedTitle => $feedUrl) {
     $feed = new SimplePie();
     $feed->enable_cache(false);
     $feed->set_curl_options([
@@ -33,6 +33,9 @@ foreach ($config['feeds'] as $feedUrl) {
                 $items[] = $item;
             }
         }
+        if (!is_numeric($feedTitle)) {
+            $feed->custom_title = $feedTitle;
+        }
         $feeds[] = $feed;
     }
 }
@@ -48,7 +51,7 @@ usort($items, function($i1, $i2) {
 // Sort feeds by title
 
 usort($feeds, function($f1, $f2) {
-    return strcmp($f1->get_title(), $f2->get_title());
+    return strcmp($f1->custom_title ?: $f1->get_title(), $f2->custom_title ?: $f2->get_title());
 });
 
 //---------------------------------------------------------------------------

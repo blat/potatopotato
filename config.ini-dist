@@ -1,5 +1,5 @@
 feeds[] = http://host.tld/path/to/feed
-feeds[] = http://anotherhost.tld/path/to/feed
+feeds[My awesome blog] = http://anotherhost.tld/path/to/feed
 
 title = My Planet
 description = Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

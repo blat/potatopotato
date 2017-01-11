@@ -27,7 +27,7 @@
                         <p class="post-meta">
                             <?= $item->get_date($date_format) ?>
                             by
-                            <a href="<?= $item->get_feed()->get_link() ?>" target="_blank"><?= $item->get_feed()->get_title() ?></a>
+                            <a href="<?= $item->get_feed()->get_link() ?>" target="_blank"><?= $item->get_feed()->custom_title ?: $item->get_feed()->get_title() ?></a>
                         </p>
                         <?= tidy_repair_string($item->get_content(), ['show-body-only' => true], 'utf8') ?>
                     </div>
@@ -54,7 +54,7 @@
                         <h4>Sources</h4>
                         <ol class="list-unstyled">
                         <?php foreach ($feeds as $feed): ?>
-                            <li><a href="<?= $feed->get_link() ?>" target="_blank"><?= $feed->get_title() ?></a></li>
+                            <li><a href="<?= $feed->get_link() ?>" target="_blank"><?= $feed->custom_title ?: $feed->get_title() ?></a></li>
                         <?php endforeach ?>
                         </ol>
                     </div>
