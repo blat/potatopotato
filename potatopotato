@@ -70,6 +70,7 @@ if (file_exists(__DIR__ . '/build')) {
 // Generate output
 
 $templates = new League\Plates\Engine(__DIR__ . '/templates');
+$templates->addFolder('custom', __DIR__ . '/templates/custom', true);
 for ($page = 1; $page < (count($items) / $config['page_size']) + 1; $page++) {
     $data = $config;
     $data['page'] = $page;

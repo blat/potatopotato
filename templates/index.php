@@ -11,6 +11,7 @@
         <link href="<?= $favicon ?: '/favicon.png' ?>" rel="icon">
     </head>
     <body>
+        <?php $this->insert('custom::header') ?>
         <div class="container">
             <div class="header">
                 <h1 class="title"><a href="/"><?= $title ?></a></h1>
