@@ -35,6 +35,8 @@ foreach ($config['feeds'] as $feedTitle => $feedUrl) {
         }
         if (!is_numeric($feedTitle)) {
             $feed->custom_title = $feedTitle;
+        } else {
+            $feed->custom_title = null;
         }
         $feeds[] = $feed;
     }
