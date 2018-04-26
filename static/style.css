@@ -4,6 +4,7 @@
 body {
     font-family: Georgia, "Times New Roman", Times, serif;
     color: #555;
+    font-size: 14px;
 }
 
 h1, .h1,
@@ -23,29 +24,33 @@ img {
     height: auto;
 }
 
+a {
+    color: #337ab7;
+}
+
 /*
 * Override Bootstrap's default container.
 */
 @media (min-width: 1200px) {
     .container {
-        width: 970px;
+        width: 980px;
     }
 }
 
 /*
-* Blog name and description
-*/
-.header {
+ * Blog name and description
+ */
+.blog-header {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-.title {
+.blog-title {
     margin-top: 30px;
     margin-bottom: 0;
     font-size: 60px;
     font-weight: normal;
 }
-.description {
+.blog-description {
     font-size: 20px;
     color: #999;
 }
@@ -53,33 +58,20 @@ img {
 /*
 * Main column and sidebar layout
 */
-.main {
+.blog-main {
     font-size: 18px;
     line-height: 1.5;
 }
-
-/* Sidebar modules for boxing content */
-.sidebar-module {
-    padding: 15px;
-    margin: 0 -15px 15px;
-}
-.sidebar-module-inset {
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 4px;
-}
-.sidebar-module-inset p:last-child,
-.sidebar-module-inset ul:last-child,
-.sidebar-module-inset ol:last-child {
-    margin-bottom: 0;
+.blog-sidebar h4 {
+    font-size: 18px;
 }
 
 /* Pagination */
-.pager {
+.blog-pagination {
     margin-bottom: 60px;
     text-align: left;
 }
-.pager > li > a {
+.blog-pagination > .btn {
     width: 140px;
     padding: 10px 20px;
     text-align: center;
@@ -87,30 +79,30 @@ img {
 }
 
 /*
-* Blog posts
-*/
-.post {
+ * Blog posts
+ */
+.blog-post {
     margin-bottom: 60px;
 }
-.post-title {
+.blog-post-title {
     margin-bottom: 5px;
     font-size: 40px;
 }
-.post-meta {
+.blog-post-meta {
     margin-bottom: 20px;
     color: #999;
 }
 
 /*
-* Footer
-*/
-.footer {
+ * Footer
+ */
+.blog-footer {
     padding: 40px 0;
     color: #999;
     text-align: center;
     background-color: #f9f9f9;
     border-top: 1px solid #e5e5e5;
 }
-.footer p:last-child {
+.blog-footer p:last-child {
     margin-bottom: 0;
 }
